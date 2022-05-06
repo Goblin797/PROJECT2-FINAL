@@ -26,7 +26,8 @@ const createIntern = async (req, res) => {
         //MOBILE NUMBER VALIDATION BY REGEX
         const validateNumber = (number) =>{
             return String(number).trim().match(
-                /^(\+\d{1,3}[- ]?)?\d{10}$/
+                ///^(\+\d{1,3}[- ]?)?\d{10}$/
+                /^[6-9]\d{9}$/gi
             )
         }
 
