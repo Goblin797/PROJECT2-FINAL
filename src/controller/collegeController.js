@@ -33,7 +33,7 @@ const createCollege = async (req,res) => {
       return res.status(400).send({status:false, message:"College abbrevaite name is missing"})
     }
     if(!validateName(data.name)){
-      return res.status(400).send({status:false, message:"College abbreviate name is INVALID"})
+      return res.status(400).send({status:false, message:"College abbreviate name should only contain lowercase alphabet"})
     }
         //check for unique name
         const uniqueName = await CollegeModel.findOne({name:data.name})  //search for name present in college collection
