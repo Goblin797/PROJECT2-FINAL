@@ -10,13 +10,13 @@ const createIntern = async (req, res) => {
     try {
         //NAME VALIDATION BY REJEX
         const validateName = (name) => {
-            return String(name).match(
-                /^[a-zA-Z]+$/);
+            return String(name).trim().match(
+                /^[a-zA-Z][a-zA-Z\s]+$/);
         };
 
         //EMAIL VALIDATION BY REJEX
         const validateEmail = (email) => {
-            return String(email)
+            return String(email).trim()
                 .toLowerCase()
                 .match(
                     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -25,7 +25,7 @@ const createIntern = async (req, res) => {
 
         //MOBILE NUMBER VALIDATION BY REGEX
         const validateNumber = (number) =>{
-            return String(number).match(
+            return String(number).trim().match(
                 /^(\+\d{1,3}[- ]?)?\d{10}$/
             )
         }
