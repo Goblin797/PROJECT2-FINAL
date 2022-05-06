@@ -72,23 +72,22 @@ const createIntern = async (req, res) => {
 
           }
 
-        //collegeId
-        if(!data.collegeId){
-            return res.status(400).send({status:false, message:"collegeId is missing"})
+        //collegeName
+        if(!data.collegeName){
+            return res.status(400).send({status:false, message:"collegeName is missing"})
         }
 
-        let isValidcollegeID = mongoose.Types.ObjectId.isValid(data.collegeId);//check if objectId is objectid
-        if (!isValidcollegeID) {
-            return res.status(400).send({ status: false, messagecd: `College ID ${data.collegeId} is INVALID!!` });
-        }
-
-        const id = await CollegeModel.findById(data.collegeId)
-        if(!id){
-            return res.status(404).send({status:false, message:`College ID ${data.collegeId} dont exist!!`})
+ 
+        const name = await CollegeModel.findOne({name:data.collegeName})
+        if(!name){
+            return res.status(404).send({status:false, message:`College name ${data.collegeName} dont exist!!`})
 
         }
+        const id = name._id
 
-        const InterData = await InternModel.create(data)
+
+
+        const InterData = await InternModel.create({name:data.name,email:data.email,mobile:data.mobile,collegeId:id})
         return res.status(201).send({status:true, data:InterData})
     }
     catch(err){
