@@ -15,7 +15,7 @@ const createCollege = async (req,res) => {
 
     const validatefullName = (name) => {
       return String(name).trim().match(
-          /^[a-zA-Z]+/
+          /^[a-zA-Z\s]+\,?[a-zA-Z\s]+$/
           );
      };
 

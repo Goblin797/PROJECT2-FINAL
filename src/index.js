@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-mongoose.connect("mongodb+srv://goblin797:Monkey721@cluster0.skwvd.mongodb.net/kaushik1234?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://goblin797:Monkey721@cluster0.skwvd.mongodb.net/group88collection?retryWrites=true&w=majority", {
     useNewUrlParser: true
 })
 .then( () => console.log("MongoDb is connected"))
@@ -27,7 +27,7 @@ app.get('/functionup/getdetails', function(req,res){
     res.render('getdetails.ejs')
 })
 
-app.use('/', route)
+app.use('/functionup', route)
 
 
 app.listen(process.env.PORT || 3000, function () {

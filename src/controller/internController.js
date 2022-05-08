@@ -110,7 +110,7 @@ const getInterns = async (req,res) => {
         }
         console.log(college)
         
-        const InternsData = await InternModel.find({collegeId:college._id,isDeleted:false}).select({isDeleted:0,collegeId:0,createdAt:0,updatedAt:0,__v:0})
+        const InternsData = await InternModel.find({collegeId:college._id,isDeleted:false}).select({isDeleted:0,collegeId:0,createdAt:0,updatedAt:0,__v:0}).sort({createdAt:-1})
         console.log(InternsData)
         
         if(InternsData.length==0){
@@ -126,14 +126,15 @@ const getInterns = async (req,res) => {
         // console.log(detail)
 
         //can also be done using college._doc.interests=[interdata]
-        college._doc.interests=InternsData
+        //college._doc.interests=InternsData
 
         //we can deep copy using JSONstringfy method
 
-        // const d = JSON.parse(JSON.stringify(college))
-        // d.interests = InternsData
+        const d = JSON.parse(JSON.stringify(college))
+        delete d._id
+        d.interests = InternsData
 
-        return res.status(200).send({status:true, data:college})
+        return res.status(200).send({status:true, data:d})
 
 
     }
